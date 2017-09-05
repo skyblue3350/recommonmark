@@ -277,6 +277,8 @@ def parse_inline(parent_node, inline):
         node = inline_html(inline)
     elif (inline.t == "Entity"):
         node = inline_entity(inline)
+    elif inline.t == "Hardbreak":
+        node = nodes.raw('', '<br />', format='html')
     else:
         warn("Unsupported inline type " + inline.t)
         return
