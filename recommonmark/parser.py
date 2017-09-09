@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 import itertools
+import base64
 
 from docutils import parsers, nodes, utils
 
@@ -107,6 +108,7 @@ class CommonMarkParser(parsers.Parser):
         append_inlines(title_node, block.inline_content)
         new_section.append(title_node)
         name = nodes.fully_normalize_name(title_node.astext())
+        name = base64.b64encode(name.encode()).decode()
         new_section['names'].append(name)
         self.current_node.document.note_implicit_target(new_section, new_section)
         new_section['ids'].append(nodes.make_id(name))
